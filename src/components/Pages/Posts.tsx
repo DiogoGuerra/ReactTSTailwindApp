@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {fetchPosts, Post} from '../API/fetchPosts';
 import { Link } from 'react-router-dom';
+import Loading from '../UI/Loading';
 
 const Posts = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -37,7 +38,7 @@ const Posts = () => {
     }, []);
   
     if (loading) {
-      return <div>Loading...</div>;
+      return <Loading />; 
     }
   
     if (error) {

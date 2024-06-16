@@ -8,6 +8,7 @@ import { deleteComment } from "../API/deleteComment";
 import { createComment } from '../API/postNewComment';
 import DeleteConfirmationModal from "../Modals/DeleteConfirmationModal";
 import CreateCommentModal from "../Modals/CreateCommentModal";
+import Loading from "../UI/Loading";
 
 const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -45,7 +46,7 @@ const PostDetail = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading />; 
   }
 
   if (error) {
