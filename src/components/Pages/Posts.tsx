@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {fetchPosts, Post} from '../API/fetchPosts';
 import { Link } from 'react-router-dom';
 import Loading from '../UI/Loading';
+import ErrorPage from './ErrorPage';
 
 const Posts = () => {
     const [posts, setPosts] = useState<Post[]>([]);
@@ -42,7 +43,7 @@ const Posts = () => {
     }
   
     if (error) {
-      return <div>Error: {error}</div>;
+      return <ErrorPage message={error} />; 
     }
 
   // Calculate the posts to be displayed on the current page

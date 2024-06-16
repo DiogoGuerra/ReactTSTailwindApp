@@ -9,6 +9,7 @@ import { createComment } from '../API/postNewComment';
 import DeleteConfirmationModal from "../Modals/DeleteConfirmationModal";
 import CreateCommentModal from "../Modals/CreateCommentModal";
 import Loading from "../UI/Loading";
+import ErrorPage from "./ErrorPage";
 
 const PostDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -50,7 +51,7 @@ const PostDetail = () => {
   }
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorPage message={error} />; 
   }
 
   //CREATE MODAL FUNCTIONS
