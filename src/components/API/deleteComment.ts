@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com";
+import { API_URL } from '../constants';
 
 export const deleteComment = async (commentId: number): Promise<void> => {
   const response = await fetch(`${API_URL}/comments/${commentId}`, {

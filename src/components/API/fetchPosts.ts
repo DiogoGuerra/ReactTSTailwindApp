@@ -1,4 +1,4 @@
-const API_URL = "https://jsonplaceholder.typicode.com/posts";
+import { API_URL } from '../constants';
 
 export interface Post {
   userId: number;
@@ -9,7 +9,7 @@ export interface Post {
 
 export const fetchPosts = async (): Promise<Post[]> => {
   try {
-    const response = await fetch(API_URL);
+    const response = await fetch(`${API_URL}/posts`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch posts. Please try again later.");
@@ -29,7 +29,7 @@ export const fetchPosts = async (): Promise<Post[]> => {
 
 export const fetchPostById = async (postId: number): Promise<Post> => {
   try {
-    const response = await fetch(`${API_URL}/${postId}`);
+    const response = await fetch(`${API_URL}/posts/${postId}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch post. Please try again later.");

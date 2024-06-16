@@ -1,3 +1,5 @@
+import { API_URL } from '../constants';
+
 export interface Comment {
     postId: number;
     id: number;
@@ -5,8 +7,6 @@ export interface Comment {
     email: string;
     body: string;
   }
-  
-  const API_URL = "https://jsonplaceholder.typicode.com";
   
   export const updateComment = async (comment: Comment): Promise<Comment> => {
     const response = await fetch(`${API_URL}/comments/${comment.id}`, {

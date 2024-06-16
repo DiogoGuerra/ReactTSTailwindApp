@@ -1,5 +1,4 @@
-
-const API_URL = "https://jsonplaceholder.typicode.com/comments";
+import { API_URL } from '../constants';
 
 export interface Comment {
   postId: number;
@@ -11,7 +10,7 @@ export interface Comment {
 
 export const fetchCommentsByPostId = async (postId: number): Promise<Comment[]> => {
   try {
-    const response = await fetch(`${API_URL}?postId=${postId}`);
+    const response = await fetch(`${API_URL}/comments?postId=${postId}`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch comments. Please try again later.");
