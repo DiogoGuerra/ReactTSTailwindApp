@@ -142,13 +142,14 @@ const PostDetail = () => {
         </div>
       )}
 
-      <h3 className="text-xl font-bold my-4">Comments</h3>
+         <div className="w-full max-w-6xl mx-4">
+         <h3 className="text-2xl font-bold my-4 text-center text-blue-400 border-b-2 border-blue-300 pb-2">Comments</h3>
       <div className="w-full flex justify-end">
       <button
           onClick={() => setIsCreateModalOpen(true)}
           className="mb-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700"
         >
-          + Add Comment
+          Add Comment
         </button>
       </div>
       <ul className="space-y-4">
@@ -174,6 +175,7 @@ const PostDetail = () => {
           </li>
         ))}
       </ul>
+      </div>
 
       <EditCommentModal
         comment={selectedComment}

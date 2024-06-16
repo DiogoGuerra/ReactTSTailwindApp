@@ -65,8 +65,9 @@ const Posts = () => {
   
   return (
     <div className="p-4 flex flex-col items-center">
-      <h2 className="text-2xl font-bold mb-4 text-center">Posts</h2>
-      <ul className="space-y-4">
+        <h2 className="text-2xl font-bold my-4 text-center text-blue-400 border-b-2 border-blue-400 pb-2">Posts</h2>
+      <ul className="space-y-4 w-full max-w-6xl mx-4">
+
         {currentPosts.map((post) => (
           <li key={post.id} className="p-4 bg-white rounded shadow-md">
             <h3 className="text-xl font-semibold">{post.title}</h3>
