@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCommentsByPostId, Comment } from '../API/fetchComments';
 import {fetchPostById, Post} from '../API/fetchPosts';
+import EditCommentModal from '../Modals/EditCommentModal';
+import { updateComment } from '../API/updateCommet';
 
 const PostDetail = () => {
     const { id } = useParams<{ id: string }>();
@@ -10,6 +12,8 @@ const PostDetail = () => {
     const [comments, setComments] = useState<Comment[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedComment, setSelectedComment] = useState<Comment | null>(null);
   
     useEffect(() => {
       const getPostAndComments = async () => {
@@ -41,6 +45,29 @@ const PostDetail = () => {
     if (error) {
       return <div>Error: {error}</div>;
     }
+
+    const handleEditClick = (comment: Comment) => {
+      setSelectedComment(comment);
+      setIsEditModalOpen(true);
+    };
+  
+    const handleCloseModal = () => {
+      setIsEditModalOpen(false);
+      setSelectedComment(null);
+    };
+
+    const handleSaveComment = async (updatedComment: Comment) => {
+      try {
+        await updateComment(updatedComment);
+        setComments((prevComments) =>
+          prevComments.map((comment) =>
+            comment.id === updatedComment.id ? updatedComment : comment
+          )
+        );
+      } catch (error) {
+        setError((error as Error).message);
+      }
+    };
   
     return (
       <div className="p-4 flex flex-col items-center">
@@ -63,12 +90,25 @@ const PostDetail = () => {
         <ul className="space-y-4">
           {comments.map((comment) => (
             <li key={comment.id} className="p-4 bg-white rounded shadow-md">
-              <h4 className="text-lg font-semibold">{comment.name}</h4>
-              <p className="text-sm text-gray-600">{comment.email}</p>
-              <p>{comment.body}</p>
-            </li>
+            <h4 className="text-lg font-semibold">{comment.name}</h4>
+            <p className="text-sm text-gray-600">{comment.email}</p>
+            <p>{comment.body}</p>
+            <button
+              onClick={() => handleEditClick(comment)}
+              className="text-blue-500 hover:underline"
+            >
+              Edit
+            </button>
+          </li>
           ))}
         </ul>
+
+        <EditCommentModal
+        comment={selectedComment}
+        isOpen={isEditModalOpen}
+        onClose={handleCloseModal}
+        onSave={handleSaveComment}
+      />
       </div>
     );
   };
