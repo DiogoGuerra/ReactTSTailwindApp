@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Comment } from '../API/updateCommet';
 
 interface EditCommentModalProps {
@@ -17,7 +17,7 @@ const EditCommentModal = ({ comment, isOpen, onClose, onSave }: EditCommentModal
 
   if (!isOpen || !comment) return null;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: any) => {
     const { name, value } = e.target;
     setEditedComment((prevComment) => (prevComment ? { ...prevComment, [name]: value } : null));
   };
